@@ -13,16 +13,18 @@ class BankAccount {
         return this.balance;
     }
     
-    withdraw(n: number):number{
-        this.transactions.push(-n);
-        this.balance -= n;
-        return this.balance;
-    }
-    
-    deposit(n: number):number{
+    transact(n: number):number{
         this.transactions.push(n);
         this.balance += n;
         return this.balance;
+    }
+    
+    withdraw(n: number):number{
+        return this.transact(-n);
+    }
+    
+    deposit(n: number):number{
+        return this.transact(n);
     }
     
     totalTransactions():number{
@@ -30,7 +32,7 @@ class BankAccount {
     }
 }
 
-let rothschild = new BankAccount("Sir MoneyBanks", 1, []);
+let rothschild = new BankAccount("Sir MoneyBanks", 0, []);
 console.log(rothschild.getBalance());
 console.log(rothschild.deposit(500));
 console.log(rothschild.withdraw(300));

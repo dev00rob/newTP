@@ -7,22 +7,23 @@ var BankAccount = (function () {
     BankAccount.prototype.getBalance = function () {
         return this.balance;
     };
-    BankAccount.prototype.withdraw = function (n) {
-        this.transactions.push(-n);
-        this.balance -= n;
-        return this.balance;
-    };
-    BankAccount.prototype.deposit = function (n) {
+    BankAccount.prototype.transact = function (n) {
         this.transactions.push(n);
         this.balance += n;
         return this.balance;
+    };
+    BankAccount.prototype.withdraw = function (n) {
+        return this.transact(-n);
+    };
+    BankAccount.prototype.deposit = function (n) {
+        return this.transact(n);
     };
     BankAccount.prototype.totalTransactions = function () {
         return this.transactions.length;
     };
     return BankAccount;
 }());
-var rothschild = new BankAccount("Sir MoneyBanks", 1, []);
+var rothschild = new BankAccount("Sir MoneyBanks", 0, []);
 console.log(rothschild.getBalance());
 console.log(rothschild.deposit(500));
 console.log(rothschild.withdraw(300));
